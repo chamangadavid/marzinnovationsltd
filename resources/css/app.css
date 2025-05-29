@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts - keep this at the very top of your custom styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* Base/Root styles that might not be covered by Tailwind's reset or need specific overrides */
+body {
+    font-family: 'Montserrat', sans-serif;
+    /* Tailwind's base will often handle margin/padding, but ensure no unwanted defaults */
+    box-sizing: border-box; /* Good practice for all elements */
+    color: #333; /* Default text color if not set by Tailwind */
+    overflow-x: hidden; /* Prevent horizontal scroll due to hero image positioning */
+}
+
+/* Custom utility-like classes that are hard to do with standard Tailwind */
+/* These could also be inline styles or calculated in JS if dynamic */
+.hero-image-positioning {
+    position: relative;
+    right: -100px; /* Moves image 100px to the right of its natural position */
+    top: -20px; /* Moves image 20px up from its natural position */
+}
+
+/* You can define custom colors in your tailwind.config.js for better management */
+/* For now, direct colors are used as per your original CSS */
+
+/* Using @apply for semantic component classes (optional but recommended for complex styles) */
+/* This makes your HTML cleaner, but moves styles to CSS */
+
+/* Example: Navbar styling (if not fully covered by utility classes in HTML) */
+@layer components {
+    .navbar-contact-button {
+        @apply bg-[#28a745] text-white px-5 py-2 rounded-md font-semibold text-lg no-underline transition-colors duration-300;
+    }
+
+    .btn-primary {
+        @apply bg-[#92e623] text-[#004d40] px-8 py-4 rounded-md text-lg cursor-pointer transition-colors duration-300;
+    }
+    .btn-primary:hover {
+        @apply bg-[#7ad11a];
+    }
+
+    .btn-secondary {
+        @apply bg-transparent text-white border-2 border-white px-8 py-4 rounded-md text-lg cursor-pointer transition-colors duration-300;
+    }
+    .btn-secondary:hover {
+        @apply bg-white bg-opacity-10; /* Tailwind's rgba syntax */
+    }
+
+    /* You would define classes for other complex elements if you choose this path */
+    /* .feature-item-card { @apply bg-white p-8 rounded-lg shadow-md; } */
+}
+
+
+/* Responsive adjustments for custom properties or overrides that Tailwind doesn't handle easily */
+/* Most responsive adjustments will be done with Tailwind's responsive prefixes (md:, lg:) */
+@media (max-width: 992px) {
+    /* If you hide navbar links, this might be a custom rule */
+    /* .navbar .nav-links { display: none; } */
+
+    /* If hero-image-positioning needs to be overridden */
+    .hero-image-positioning {
+        position: static; /* Reset positioning on smaller screens */
+        right: 0;
+        top: 0;
+    }
+}
+/* You can delete all other media queries if you commit to Tailwind's responsive prefixes */
+/* @media (max-width: 768px) { ... } */
+/* @media (max-width: 480px) { ... } */
