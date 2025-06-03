@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/vue3';
 
 
 <template>
-    <Head title="Contact" />
+    <Head title="Home" />
 
     <footer class="bg-gray-200 text-gray-700 pt-16 pb-8">
         <div class="container mx-auto px-5">

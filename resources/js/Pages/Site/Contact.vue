@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Head, Link } from '@inertiajs/vue3';
 import { notification } from 'ant-design-vue';
 import axios from 'axios'
 
@@ -59,15 +59,23 @@ const submitForm = () => {
 </script>
 
 <template>
+    <Head title="Contact" />
+
     <div class="font-sans antialiased text-gray-800">
       <section class="relative bg-cover bg-center h-64 flex items-center justify-center text-white"
-    style="background-image: url('/assets/contact.jpg');">
-  <div class="absolute inset-0 bg-black opacity-50"></div>
-  <div class="relative z-10 text-center">
-    <h1 class="text-5xl font-bold mb-2">Contact Us</h1>
-    <p class="text-lg">Home / Contact Us</p>
-  </div>
-</section>
+        style="background-image: url('/assets/contact.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-center">
+            <h1 class="text-5xl font-bold mb-2">Contact Us</h1>
+            <p class="text-lg">Home / Contact Us</p>
+        </div>
+    </section>
+    <div class="px-5 mt-4">
+        <Link href="/" class="inline-flex items-center text-blue-600 hover:underline text-base font-medium">
+          <span class="mr-2 text-xl">←</span>
+          Back to Home Page
+        </Link>
+      </div>
 
   
       <section class="container mx-auto px-5 py-16">

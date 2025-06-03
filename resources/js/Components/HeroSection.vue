@@ -4,12 +4,13 @@
     <section class="bg-hero-purple text-white py-20 relative overflow-hidden">
         <div class="container mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
             <div class="flex-1 max-w-xl z-10">
-                <p class="bg-white bg-opacity-20 inline-block px-4 py-1 rounded-full text-sm mb-5">Trusted Cleaning Experts in Denver!</p>
-                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-5">Reliable Cleaning <br>Services In <span class="text-[#92e623]">Denver, CO</span></h1>
-                <p class="text-lg leading-relaxed mb-8">We proudly serve Denver, CO, and the surrounding areas, ensuring top-quality service through our two dedicated lines.</p>
+                <p class="bg-white bg-opacity-20 inline-block px-4 py-1 rounded-full text-sm mb-5">Motto : Creating Value Together!</p>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-5">Marz Innovations <span class="text-[#92e623]">Limited,</span></h1>
+                <p class="text-lg leading-relaxed mb-8">
+                    We are a Digital and Branding company that strives to grow the industry by providing quality products and services.</p>
                 <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-5">
                     <button class="btn-primary">Get Instant Price</button>
-                    <a href="tel:3033094226" class="btn-secondary">(303) 309 4226</a>
+                    <a href="tel:3033094226" class="btn-secondary">(+260) 966 390 807</a>
                 </div>
             </div>
 

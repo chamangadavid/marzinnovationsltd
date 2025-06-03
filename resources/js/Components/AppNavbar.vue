@@ -24,17 +24,24 @@
                 </button>
               
                 <!-- Dropdown Menu -->
-                <div
+                <div v-if="servicesDropdownOpen"
+                    class="absolute bg-white shadow-lg rounded-md -mt-1 w-48 z-10">
+                
+                <Link
+                :href="route('servicesList')"
+                class="block px-4 py-2 text-gray-800 hover:bg-blue-100"
+                >
+                Our Service
+                </Link>
+                
+                </div>
+                <!-- <div
                   v-if="servicesDropdownOpen"
                 
                   class="absolute bg-white shadow-lg rounded-md -mt-1 w-48 z-10"
-
-                >
-                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Branding</a>
-                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Embroidery</a>
-                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Printing</a>
-                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Videography</a>
-                </div>
+                  >
+                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Our Service</a>
+                </div> -->
               </div>
 
               <Link
@@ -84,6 +91,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'; // Import ref and lifecycle hooks
 import { Link } from '@inertiajs/vue3';
+
 
 // Define props
 const props = defineProps({

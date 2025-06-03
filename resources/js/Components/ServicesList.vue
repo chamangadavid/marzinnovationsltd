@@ -10,18 +10,21 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ service.name }}</h3>
                     <p class="text-gray-600 text-center text-sm">{{ service.description }}</p>
-                    </div>
+                </div>
             </div>
-
-            <a href="#" class="text-hero-purple font-semibold flex items-center justify-center group mt-8">
-                Read More
-                <ArrowRightOutlined class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            <Link
+            :href="route('servicesList')"
+            class="text-hero-purple font-semibold flex items-center justify-center group mt-8"
+          >
+            Read More
+            <ArrowRightOutlined class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
     </section>
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import {
     TrademarkOutlined,
     SketchOutlined,
