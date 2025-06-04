@@ -347,56 +347,69 @@ watch(searchQuery, handleSearch);
           </a-table>
 
           <!-- View Modal -->
+       
           <a-modal
-            v-model:visible="isModalVisible"
-            :title="selectedRecord?.title"
-            width="800px"
-            @cancel="isModalVisible = false"
-          >
-          <hr><br/>
-            <div v-if="selectedRecord" class="space-y-4">
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <p class="font-semibold">Title: {{ selectedRecord.title }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Description:</p>
-                  <p class="whitespace-pre-line">{{ selectedRecord.description }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Price:</p>
-                  <p>ZKW {{ selectedRecord.price }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Status:</p>
-                  <a-tag :color="selectedRecord.is_active ? 'green' : 'red'">
-                    {{ selectedRecord.is_active ? 'Active' : 'Inactive' }}
-                  </a-tag>
-                </div>
-                <div>
-                  <p class="font-semibold">Images:</p>
-                  <div class="flex flex-wrap gap-2 mt-2">
-                    <img 
-                      v-for="(image, index) in selectedRecord.images" 
-                      :key="index" 
-                      :src="image" 
-                      style="width: 150px; height: auto; cursor: pointer"
-                      @click="() => { previewImage = image; previewVisible = true }"
-                    />
-                  </div>
-                </div>
-              </div>
+        v-model:visible="isModalVisible"
+        :title="selectedRecord?.title"
+        width="800px"
+        @cancel="isModalVisible = false"
+      > <hr/><br/>
+        <div v-if="selectedRecord" class="p-6 space-y-6 text-gray-700">
+          <!-- Basic Info -->
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <span class="block text-sm text-gray-500 font-medium">Title</span>
+              <p class="text-lg font-semibold">{{ selectedRecord.title }}</p>
             </div>
-            <template #footer>
-              <a-button 
-                :type="selectedRecord?.is_active ? 'danger' : 'primary'" 
-                @click="toggleStatus(selectedRecord.id, selectedRecord.is_active)"
-              >
-                {{ selectedRecord?.is_active ? 'Deactivate' : 'Activate' }}
-              </a-button>
-              <a-button @click="isModalVisible = false">Close</a-button>
-            </template>
-          </a-modal>
+
+            <div>
+              <span class="block text-sm text-gray-500 font-medium">Price</span>
+              <p class="text-lg font-semibold">ZKW {{ selectedRecord.price }}</p>
+            </div>
+
+            <div class="col-span-2">
+              <span class="block text-sm text-gray-500 font-medium">Description</span>
+              <p class="whitespace-pre-line bg-gray-50 border border-gray-200 rounded p-4 text-base">
+                {{ selectedRecord.description }}
+              </p>
+            </div>
+
+            <div>
+              <span class="block text-sm text-gray-500 font-medium">Status</span>
+              <a-tag :color="selectedRecord.is_active ? 'green' : 'red'" class="mt-1">
+                {{ selectedRecord.is_active ? 'Active' : 'Inactive' }}
+              </a-tag>
+            </div>
+          </div>
+
+          <!-- Images -->
+          <div>
+            <span class="block text-sm text-gray-500 font-medium">Images</span>
+            <div class="flex flex-wrap gap-4 mt-2">
+              <img
+                v-for="(image, index) in selectedRecord.images"
+                :key="index"
+                :src="image"
+                class="w-36 h-24 object-cover rounded shadow cursor-pointer hover:opacity-90 transition"
+                @click="() => { previewImage = image; previewVisible = true }"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <template #footer>
+          <a-button
+            type="primary"
+            :danger="selectedRecord?.is_active"
+            @click="toggleStatus(selectedRecord.id, selectedRecord.is_active)"
+          >
+            {{ selectedRecord?.is_active ? 'Deactivate' : 'Activate' }}
+          </a-button>
+          <a-button @click="isModalVisible = false">Close</a-button>
+        </template>
+      </a-modal>
+
 
           <!-- Create Modal -->
           <a-modal
@@ -409,7 +422,7 @@ watch(searchQuery, handleSearch);
           >
             <a-form layout="vertical">
               <a-form-item label="Title" required>
-                <a-input v-model:value="formState.title" />
+                <a-input v-model:value="formState.title"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
               
               <a-form-item label="Description">

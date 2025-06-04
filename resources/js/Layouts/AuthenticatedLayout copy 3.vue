@@ -1,32 +1,13 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { debounce } from 'lodash';
-import { router, usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
-import axios from 'axios'; // Make sure axios is imported
-
-const page = usePage();
-const auth = page.props.auth;
-
-
-const can = (permission) => {
-  if (auth?.user?.roles?.some(role => role.name === 'Super Admin')) {
-    return true;
-  }
-  return auth?.permissions?.includes(permission);
-};
-
-// Function to check if user has a permission requires to pass auth like  v-if="can('manage access control', auth)"
-// const can = (permission, auth) => {
-//   return auth?.permissions?.includes(permission);
-// };
-
-
 
 const showingNavigationDropdown = ref(false);
 const searchValue = ref('');
@@ -36,60 +17,61 @@ const isLoading = ref(false);
 
 // Debounced search function
 const debouncedSearch = debounce(async (value) => {
-  if (value.length < 2) {
-    searchResults.value = [];
-    showSuggestions.value = false;
-    return;
-  }
-
-  isLoading.value = true;
-  try {
-    const response = await axios.get(route('users.search'), {
-      params: { query: value }
-    });
-    searchResults.value = response.data;
-    showSuggestions.value = true;
-  } catch (error) {
-    console.error('Search error:', error);
-    searchResults.value = [];
-    showSuggestions.value = false;
-  } finally {
-    isLoading.value = false;
-  }
+    if (value.length < 2) {
+        searchResults.value = [];
+        return;
+    }
+    
+    isLoading.value = true;
+    try {
+        const response = await axios.get(route('users.search'), {
+            params: { query: value }
+        });
+        searchResults.value = response.data;
+        showSuggestions.value = true;
+    } catch (error) {
+        console.error('Search error:', error);
+        searchResults.value = [];
+        // Optional: Show error message to user
+    } finally {
+        isLoading.value = false;
+    }
 }, 500);
 
-// Watch for changes in searchValue
-watch(searchValue, (newVal) => {
-  if (newVal) {
-    debouncedSearch(newVal);
-  } else {
+// Watch for changes in search value
+watch(searchValue, (newValue) => {
+    if (newValue) {
+        debouncedSearch(newValue);
+    } else {
+        searchResults.value = [];
+        showSuggestions.value = false;
+    }
+});
+
+// Function to handle user selection
+const selectUser = (user) => {
+    router.visit(route('users.show', { user: user.id }));
+    searchValue.value = '';
     searchResults.value = [];
     showSuggestions.value = false;
-  }
-});
-
-// Select user handler
-const selectUser = (user) => {
-  router.visit(route('users.show', { user: user.id }));
-  searchValue.value = '';
-  searchResults.value = [];
-  showSuggestions.value = false;
 };
 
-// Click outside handler to close suggestions
+// Close suggestions when clicking outside
 const handleClickOutside = (event) => {
-  const searchContainer = document.querySelector('.search-container');
-  if (searchContainer && !searchContainer.contains(event.target)) {
-    showSuggestions.value = false;
-  }
+    const searchContainer = document.querySelector('.search-container');
+    if (searchContainer && !searchContainer.contains(event.target)) {
+        showSuggestions.value = false;
+    }
 };
 
+// Add click outside listener
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 });
 
+// Clean up listener
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
+    document.removeEventListener('click', handleClickOutside);
 });
 </script>
 
@@ -117,31 +99,14 @@ onUnmounted(() => {
                 >
                   Dashboard
                 </NavLink>
-               
-                  <NavLink
-                    v-if="can('manage access control')"
-                    :href="route('admin.rolesAndPermission')"
-                    :active="route().current('admin.rolesAndPermission')"
-                    class="text-white"
-                  >
-                    Roles & Permissions
-                  </NavLink>
-                
-                  <!-- <span
-                    v-if="auth.user.roles && auth.user.roles.length"
-                    class="ms-2 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full"
-                  >
-                    {{ auth.user.roles[0].name }}
-                  </span> -->
 
-
-                <!-- <NavLink  
+                <NavLink
                   :href="route('admin.rolesAndPermission')"
                   :active="route().current('admin.rolesAndPermission')"
                   class="text-white"
                 >
                   Roles & Permissions
-                </NavLink> -->
+                </NavLink>
               </div>
             </div>
 
@@ -191,14 +156,43 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <!-- Administration Role Display -->
+              <!-- Administration Dropdown -->
               <div class="relative ms-3">
-                <span v-if="auth.user && auth.user.roles && auth.user.roles.length"
-                      class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-medium text-gray-700 border border-gray-300">
-                  {{ auth.user.roles[0] }}
-                </span>
+                <Dropdown align="right" width="48">
+                  <template #trigger>
+                    <span class="inline-flex rounded-md">
+                      <button
+                        type="button"
+                        class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                      >
+                        Administration
+                        <svg
+                          class="-me-0.5 ms-2 h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  </template>
+
+                  <template #content>
+                    <DropdownLink :href="route('dashboard')">
+                      Roles
+                    </DropdownLink>
+                    <DropdownLink :href="route('dashboard')">
+                      Permissions
+                    </DropdownLink>
+                  </template>
+                </Dropdown>
               </div>
-              
+
               <!-- Settings Dropdown -->
               <div class="relative ms-3">
                 <Dropdown align="right" width="48">
@@ -208,9 +202,7 @@ onUnmounted(() => {
                         type="button"
                         class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                       >
-                        <!-- {{ $page.props.auth.user.name }} -->
-                        {{ auth.user.name }}
-
+                        {{ $page.props.auth.user.name }}
 
                         <svg
                           class="-me-0.5 ms-2 h-4 w-4"
@@ -283,9 +275,9 @@ onUnmounted(() => {
       >
         <div class="space-y-1 pb-3 pt-2">
           <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-            Dashboard
+            Dashboardss
           </ResponsiveNavLink>
-          <ResponsiveNavLink v-if="can('manage access control')"
+          <ResponsiveNavLink 
             :href="route('admin.rolesAndPermission')" 
             :active="route().current('admin.rolesAndPermission')">
             Roles & Permissions
@@ -295,12 +287,8 @@ onUnmounted(() => {
         <!-- Responsive Settings Options -->
         <div class="border-t border-gray-200 pb-1 pt-4">
           <div class="px-4">
-            <div class="text-base font-medium text-gray-800">{{ auth.user.name }}
-              <!-- {{ $page.props.auth.user.name }} -->
-            </div>
-            <div class="text-sm font-medium text-gray-500">{{ auth.user.email }}
-              <!-- {{ $page.props.auth.user.email }} -->
-            </div>
+            <div class="text-base font-medium text-gray-800">{{ $page.props.auth.user.name }}</div>
+            <div class="text-sm font-medium text-gray-500">{{ $page.props.auth.user.email }}</div>
           </div>
 
           <div class="mt-3 space-y-1">

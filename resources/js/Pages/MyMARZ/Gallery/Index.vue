@@ -345,47 +345,60 @@ watch(searchQuery, handleSearch);
                 </template>
             </template>
             </a-table>
-          
-          <!-- Gallery View Modal -->
+        <!-- view model -->
           <a-modal
-            v-model:visible="isModalVisible"
-            :title="selectedRecord?.title"
-            width="800px"
-            :footer="null"
-            @cancel="isModalVisible = false"
-          >
-          <hr><br />
-
-            <div v-if="selectedRecord" class="space-y-4">
-              <div class="grid grid-cols-1 gap-4">
-                <div>
-                  <p class="font-semibold">Title: {{ selectedRecord.title }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Category: {{ selectedRecord.category?.name || 'N/A' }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Description:</p>
-                  <p class="whitespace-pre-line">{{ selectedRecord.description }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold mb-2">Images:</p>
-                  <div class="grid grid-cols-3 gap-4">
-                    <img 
-                      v-for="(image, index) in selectedRecord.images" 
-                      :key="index"
-                      :src="image"
-                      class="w-full h-48 object-cover rounded"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <p class="font-semibold">Created At: {{ selectedRecord.createdAt }}</p>
-                </div>
+          v-model:visible="isModalVisible"
+          :title="selectedRecord?.title"
+          width="800px"
+          :footer="null"
+          @cancel="isModalVisible = false"
+        >
+          <div v-if="selectedRecord" class="p-6 space-y-6 text-gray-700">
+            
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <span class="block text-sm font-medium text-gray-500">Title</span>
+                <p class="text-lg font-semibold">{{ selectedRecord.title }}</p>
+              </div>
+        
+              <div>
+                <span class="block text-sm font-medium text-gray-500">Category</span>
+                <p class="text-lg font-semibold">
+                  {{ selectedRecord.category?.name || 'N/A' }}
+                </p>
               </div>
             </div>
-          </a-modal>
-
+        
+           
+            <div>
+              <span class="block text-sm font-medium text-gray-500 mb-1">Description</span>
+              <p class="whitespace-pre-line p-4 bg-gray-50 border border-gray-200 rounded">
+                {{ selectedRecord.description }}
+              </p>
+            </div>
+        
+            
+            <div>
+              <span class="block text-sm font-medium text-gray-500 mb-2">Images</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <img 
+                  v-for="(image, index) in selectedRecord.images" 
+                  :key="index"
+                  :src="image"
+                  class="w-full h-48 object-cover rounded shadow-sm border"
+                  alt="Record image"
+                />
+              </div>
+            </div>
+        
+           
+            <div>
+              <span class="block text-sm font-medium text-gray-500">Created At</span>
+              <p class="text-base font-semibold">{{ selectedRecord.createdAt }}</p>
+            </div>
+          </div>
+        </a-modal>
+        
           <!-- Add Gallery Modal -->
           <a-modal
             v-model:visible="isAddModalVisible"
@@ -397,7 +410,7 @@ watch(searchQuery, handleSearch);
           >
             <a-form layout="vertical">
               <a-form-item label="Title" required>
-                <a-input v-model:value="formState.title" />
+                <a-input v-model:value="formState.title"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
               
               <a-form-item label="Category" required>
@@ -450,7 +463,7 @@ watch(searchQuery, handleSearch);
             <a-form-item label="Category Name" required>
               <a-input 
                 v-model:value="categoryFormState.name" 
-                :disabled="categoryLoading"
+                :disabled="categoryLoading"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;         "
               />
             </a-form-item>
           </a-form>

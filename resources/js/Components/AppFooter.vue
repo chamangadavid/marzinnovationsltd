@@ -72,7 +72,8 @@ import { Head, Link } from '@inertiajs/vue3';
 
         <div class="bg-gray-300 py-4">
             <div class="container mx-auto px-5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
-                <p class="mb-2 md:mb-0">© Copyright 2025. All Rights Reserved</p>
+                <p class="mb-2 md:mb-0">© 2025 Marz Innovations Limited. All rights reserved. 
+                    Designed & Developed by Umoyo Printex Limited (0979760679) </p> 
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-600 hover:text-hero-purple transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">

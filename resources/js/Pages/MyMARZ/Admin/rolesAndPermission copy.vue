@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, h, computed } from 'vue';
+import { ref, onMounted, h } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Tabs, Table, Button, Modal, Input, Select, Tag, message, Popconfirm } from 'ant-design-vue';
+import { Tabs, Table, Button, Modal, Input, Select, Tag, message } from 'ant-design-vue';
 import axios from 'axios';
 
 // State management
@@ -10,14 +10,11 @@ const activeTab = ref('roles');
 
 // Roles state
 const roles = ref([]);
-const selectedRoleIds = ref([]);
 const roleForm = ref({
-    id: null,
     name: '',
     permissions: []
 });
 const showRoleModal = ref(false);
-const isEditingRole = ref(false);
 
 // Permissions state
 const permissions = ref([]);
@@ -44,20 +41,6 @@ const guardColors = {
     default: 'gray'
 };
 
-// Row selection configuration
-const rowSelection = computed(() => {
-    return {
-        selectedRowKeys: selectedRoleIds.value,
-        onChange: (selectedRowKeys) => {
-            selectedRoleIds.value = selectedRowKeys;
-        },
-        getCheckboxProps: (record) => ({
-            disabled: record.name === 'Super Admin', // Column configuration not to be checked
-            name: record.name,
-        }),
-    };
-});
-
 // Fetch data
 const fetchData = async () => {
     try {
@@ -70,11 +53,10 @@ const fetchData = async () => {
         roles.value = rolesRes.data.roles || [];
         permissions.value = permissionsRes.data.permissions || [];
         users.value = usersRes.data.users || [];
-        selectedRoleIds.value = []; // Clear selection on refresh
     } catch (error) {
         message.error('Failed to fetch data');
-        console.error(error);
-    }
+            console.error(error);
+        }
 };
 
 onMounted(fetchData);
@@ -82,57 +64,16 @@ onMounted(fetchData);
 // Role actions
 const handleAddRole = async () => {
     try {
-        const url = isEditingRole.value ? `/roles/${roleForm.value.id}` : '/roles';
-        const method = isEditingRole.value ? 'put' : 'post';
-        
-        await axios[method](url, {
+        await axios.post('/roles', {
             name: roleForm.value.name,
             permissions: roleForm.value.permissions
         });
-        
-        message.success(`Role ${isEditingRole.value ? 'updated' : 'created'} successfully`);
+        message.success('Role created successfully');
         showRoleModal.value = false;
-        roleForm.value = { id: null, name: '', permissions: [] };
-        isEditingRole.value = false;
+        roleForm.value = { name: '', permissions: [] };
         fetchData();
     } catch (error) {
-        message.error(error.response?.data?.message || `Failed to ${isEditingRole.value ? 'update' : 'create'} role`);
-    }
-};
-
-const openEditRoleModal = (role) => {
-    roleForm.value = {
-        id: role.id,
-        name: role.name,
-        permissions: role.permissions.map(p => p.name)
-    };
-    isEditingRole.value = true;
-    showRoleModal.value = true;
-};
-
-const deleteRole = async (roleId) => {
-    try {
-        await axios.delete(`/roles/${roleId}`);
-        message.success('Role deleted successfully');
-        fetchData();
-    } catch (error) {
-        message.error(error.response?.data?.message || 'Failed to delete role');
-    }
-};
-
-const deleteSelectedRoles = async () => {
-    if (selectedRoleIds.value.length === 0) {
-        message.warning('Please select at least one role to delete');
-        return;
-    }
-
-    try {
-        await axios.post('/roles/bulk-delete', { ids: selectedRoleIds.value });
-        message.success(`Deleted ${selectedRoleIds.value.length} roles successfully`);
-        selectedRoleIds.value = [];
-        fetchData();
-    } catch (error) {
-        message.error(error.response?.data?.message || 'Failed to delete selected roles');
+        message.error(error.response?.data?.message || 'Failed to create role');
     }
 };
 
@@ -193,19 +134,7 @@ const handleAssignRoles = async () => {
                 <a-tab-pane key="roles" tab="Roles">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-medium">Manage Roles</h3>
-                        <div class="flex gap-2">
-                            <Button 
-                                type="primary" 
-                                danger 
-                                :disabled="selectedRoleIds.length === 0"
-                                @click="deleteSelectedRoles"
-                            >
-                                Delete Selected ({{ selectedRoleIds.length }})
-                            </Button>
-                            <Button type="primary" @click="showRoleModal = true; isEditingRole = false;">
-                                Create Role
-                            </Button>
-                        </div>
+                        <Button type="primary" @click="showRoleModal = true">Create Role</Button>
                     </div>
                     
                     <a-table 
@@ -227,36 +156,8 @@ const handleAssignRoles = async () => {
                                         }, p.name))
                                     );
                                 }
-                            },
-                            {
-                                title: 'Actions',
-                                customRender: ({ record }) => {
-                                    return h('div', { class: 'flex gap-2' }, [
-                                        h(Button, {
-                                            type: 'primary',
-                                            size: 'small',
-                                            onClick: () => openEditRoleModal(record)
-                                        }, 'Edit'),
-                                        
-                                        record.name !== 'Super Admin' && h(Popconfirm, {
-                                            title: 'Are you sure to delete this role?',
-                                            onConfirm: () => deleteRole(record.id),
-                                            okText: 'Yes',
-                                            cancelText: 'No'
-                                        }, {
-                                            default: () => h(Button, {
-                                                type: 'primary',
-                                                danger: true,
-                                                size: 'small'
-                                            }, 'Delete')
-                                        })
-                                    ]);
-                                },
-                                width: '150px',
-                                align: 'center'
                             }
                         ]" 
-                        :rowSelection="rowSelection"
                         rowKey="id"
                         :pagination="{ pageSize: 10, showSizeChanger: true }"
                         bordered
@@ -355,12 +256,12 @@ const handleAssignRoles = async () => {
             </a-tabs>
         </div>
 
-        <!-- Create/Edit Role Modal -->
+        <!-- Create Role Modal -->
         <a-modal 
             v-model:open="showRoleModal" 
-            :title="isEditingRole ? 'Edit Role' : 'Create New Role'"
+            title="Create New Role"
             @ok="handleAddRole"
-            :ok-text="isEditingRole ? 'Update' : 'Create'"
+            ok-text="Create"
             cancel-text="Cancel"
             :maskClosable="false"
         >
@@ -380,7 +281,7 @@ const handleAssignRoles = async () => {
                         placeholder="Select permissions"
                         style="width: 100%"
                         :options="permissions.map(p => ({ 
-                            label: `${p.name} (${p.guard_name})`, 
+                            label: p.name, 
                             value: p.name 
                         }))"
                     />
@@ -484,12 +385,5 @@ const handleAssignRoles = async () => {
 :deep(.ant-modal-footer) {
     border-top: 1px solid #e2e8f0;
     padding: 16px 24px;
-}
-
-/* Action buttons styling */
-:deep(.ant-btn-sm) {
-    font-size: 12px;
-    padding: 0 8px;
-    height: 24px;
 }
 </style>

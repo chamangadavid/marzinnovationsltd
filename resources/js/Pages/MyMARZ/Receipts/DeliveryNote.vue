@@ -76,7 +76,7 @@
             </a-col>
             <a-col :span="8">
               <a-form-item label="Delivery Address" name="delivery_address" :rules="[{ required: true, message: 'Please enter delivery address' }]">
-                <a-input v-model:value="formState.delivery_address" />
+                <a-input v-model:value="formState.delivery_address"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
             </a-col>
           </a-row>
@@ -84,12 +84,12 @@
           <a-row :gutter="16">
             <a-col :span="12">
               <a-form-item label="Reference (PO/Invoice #)" name="reference_number">
-                <a-input v-model:value="formState.reference_number" />
+                <a-input v-model:value="formState.reference_number"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
             </a-col>
             <a-col :span="12">
               <a-form-item label="Vehicle Number" name="vehicle_number">
-                <a-input v-model:value="formState.vehicle_number" />
+                <a-input v-model:value="formState.vehicle_number"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
             </a-col>
           </a-row>
@@ -132,7 +132,7 @@
           </a-form-item>
   
           <a-form-item label="Received By" name="received_by">
-            <a-input v-model:value="formState.received_by" />
+            <a-input v-model:value="formState.received_by"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
           </a-form-item>
         </a-form>
       </a-modal>

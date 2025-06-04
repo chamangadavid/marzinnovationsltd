@@ -1,10 +1,10 @@
-
+<!-- 
 
 <template>
     <section class="bg-hero-purple text-white py-20 relative overflow-hidden">
         <div class="container mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
             <div class="flex-1 max-w-xl z-10">
-                <p class="bg-white bg-opacity-20 inline-block px-4 py-1 rounded-full text-sm mb-5">Motto : Creating Value Together!</p>
+                <p class="bg-white bg-opacity-20 inline-block px-4 py-1 rounded-full text-sm mb-5">Creating Value Together!</p>
                 <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-5">Marz Innovations <span class="text-[#92e623]">Limited,</span></h1>
                 <p class="text-lg leading-relaxed mb-8">
                     We are a Digital and Branding company that strives to grow the industry by providing quality products and services.</p>
@@ -35,10 +35,11 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const images = ref([
-    '/assets/hero/hero-image-0.png', 
-    '/assets/hero/hero-image-1.png', 
-    '/assets/hero/hero-image-2.png',
-    '/assets/hero/hero-image-3.png',
+    '/assets/hero/five.png',
+    '/assets/hero/two.png', 
+    '/assets/hero/three.png', 
+    '/assets/hero/four.png', 
+
 ]);
 
 const currentIndex = ref(0);
@@ -76,9 +77,100 @@ onUnmounted(() => {
 .fade-leave-active {
     position: absolute;
 }
+</style> -->
+
+
+
+<template>
+    <section class="bg-hero-purple text-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
+            <div class="flex-1 max-w-xl z-10">
+                <p class="bg-white bg-opacity-20 inline-block px-4 py-1 rounded-full text-sm mb-5">Creating Value Together!</p>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-5">Marz Innovations <span class="text-[#92e623]">Limited,</span></h1>
+                <p class="text-lg leading-relaxed mb-8">
+                    We are a Digital and Branding company that strives to grow the industry by providing quality products and services.</p>
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-5">
+                    <button class="btn-primary">Get Instant Price</button>
+                    <a href="tel:3033094226" class="btn-secondary">(+260) 966 390 807</a>
+                </div>
+            </div>
+
+            <div class="flex-1 text-right relative md:static -right-24 -top-5 md:right-0 md:top-0 md:max-w-md">
+                <div class="relative w-full h-96 overflow-hidden rounded-lg">
+                    <transition-group name="slide" tag="div" class="absolute inset-0">
+                        <img
+                            v-for="(image, index) in images"
+                            :key="image"
+                            :src="image"
+                            :alt="`Cleaning professional ${index + 1}`"
+                            v-show="index === currentIndex"
+                            class="absolute inset-0 w-full h-full object-cover rounded-lg"
+                        >
+                    </transition-group>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const images = ref([
+    '/assets/hero/five.png',
+    '/assets/hero/two.png', 
+    '/assets/hero/three.png', 
+]);
+
+const currentIndex = ref(0);
+let intervalId = null; 
+
+const nextImage = () => {
+    currentIndex.value = (currentIndex.value + 1) % images.value.length;
+};
+
+onMounted(() => {
+    intervalId = setInterval(nextImage, 5000);
+});
+
+onUnmounted(() => {
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+});
+</script>
+
+<style scoped>
+/* Slide transition */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 1s ease;
+}
+
+.slide-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-leave-active {
+  position: absolute;
+}
 </style>
-
-
 
 
 

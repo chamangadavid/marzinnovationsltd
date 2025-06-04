@@ -292,41 +292,53 @@ watch(searchQuery, handleSearch);
 
           <!-- View Modal -->
           <a-modal
-            v-model:visible="isModalVisible"
-            :title="selectedRecord?.title"
-            width="800px"
-            :footer="null"
-            @cancel="isModalVisible = false"
-          >
-            <div v-if="selectedRecord" class="space-y-4">
-              <div class="grid grid-cols-1 gap-4">
-                <div>
-                  <p class="font-semibold">Title:</p>
-                  <p>{{ selectedRecord.title }}</p>
-                </div>
-                <div>
-                  <p class="font-semibold">Description:</p>
-                  <p class="whitespace-pre-line">{{ selectedRecord.description }}</p>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <p class="font-semibold">Start Date:</p>
-                    <p>{{ selectedRecord.start_date }}</p>
-                  </div>
-                  <div>
-                    <p class="font-semibold">End Date:</p>
-                    <p>{{ selectedRecord.end_date }}</p>
-                  </div>
-                </div>
-                <div>
-                  <p class="font-semibold">Status:</p>
-                  <span :class="`px-2 py-1 rounded-full text-xs ${selectedRecord.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`">
-                    {{ selectedRecord.is_active ? 'Active' : 'Inactive' }}
-                  </span>
-                </div>
+          v-model:visible="isModalVisible"
+          :title="selectedRecord?.title"
+          width="800px"
+          :footer="null"
+          @cancel="isModalVisible = false"
+        > <hr/><br/>
+          <div v-if="selectedRecord" class="p-6 space-y-6 text-gray-700">
+            <!-- Title -->
+            <div>
+              <h3 class="text-sm text-gray-500 font-medium mb-1">Title</h3>
+              <p class="text-lg font-semibold">{{ selectedRecord.title }}</p>
+            </div>
+        
+            <!-- Description -->
+            <div>
+              <h3 class="text-sm text-gray-500 font-medium mb-1">Description</h3>
+              <p class="whitespace-pre-line bg-gray-50 border border-gray-200 rounded-md p-4 text-base leading-relaxed">
+                {{ selectedRecord.description }}
+              </p>
+            </div>
+        
+            <!-- Dates -->
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <h3 class="text-sm text-gray-500 font-medium mb-1">Start Date</h3>
+                <p class="text-base font-semibold">{{ selectedRecord.start_date }}</p>
+              </div>
+              <div>
+                <h3 class="text-sm text-gray-500 font-medium mb-1">End Date</h3>
+                <p class="text-base font-semibold">{{ selectedRecord.end_date }}</p>
               </div>
             </div>
-          </a-modal>
+        
+            <!-- Status -->
+            <div>
+              <h3 class="text-sm text-gray-500 font-medium mb-1">Status</h3>
+              <span
+                class="inline-block px-3 py-1 rounded-full text-sm font-medium"
+                :class="selectedRecord.is_active 
+                  ? 'bg-green-100 text-green-800' 
+                  : 'bg-red-100 text-red-800'"
+              >
+                {{ selectedRecord.is_active ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+          </div>
+        </a-modal>
 
           <!-- Create Modal -->
           <a-modal
@@ -339,7 +351,7 @@ watch(searchQuery, handleSearch);
           >
             <a-form layout="vertical">
               <a-form-item label="Title" required>
-                <a-input v-model:value="formState.title" />
+                <a-input v-model:value="formState.title"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
               </a-form-item>
               
               <a-form-item label="Description">

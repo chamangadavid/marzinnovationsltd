@@ -78,13 +78,34 @@ const dynamicRoute = computed(() => {
 
 <style scoped>
 .certificate-card {
-  /* background-image: url("/assets/CONTIR-1431-background-mobile.png"); */
-  /* background-image: url("/assets/header-default-desktop.png"); */
   background-image: url("/assets/bg-grey.png");
   background-repeat: no-repeat;
   background-color: #fff;
   background-size: cover;
-  width: auto;
+  width: auto; /* full width on small screens */
+  max-width: auto; /* limit max width */
+  min-height: 230px;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 0 11px 30px 0 rgba(0, 0, 0, 0.07);
+  margin: 0 auto; /* center the card */
+}
+
+@media (min-width: 640px) {
+  .certificate-card {
+    width: 100%; /* full width on small screens */
+  }
+}
+
+
+/*
+.certificate-card {
+  background-image: url("/assets/bg-grey.png");
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-size: cover;
+  width: 200px !important;
   border: 0px solid #e0e0e0;
   min-height: 230px;
   border-radius: 20px;
@@ -92,6 +113,7 @@ const dynamicRoute = computed(() => {
   cursor: pointer;
   box-shadow: 0 11px 30px 0 rgba(0, 0, 0, 0.07);
 }
+  */
 
 .header {
   display: flex;

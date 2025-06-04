@@ -42,19 +42,19 @@
       >
         <a-form layout="vertical" :model="formState" ref="formRef">
           <a-form-item label="Name" name="name" :rules="[{ required: true, message: 'Please enter name' }]">
-            <a-input v-model:value="formState.name" />
+            <a-input v-model:value="formState.name"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
           </a-form-item>
           <a-form-item label="Email" name="email">
-            <a-input v-model:value="formState.email" type="email" />
+            <a-input v-model:value="formState.email" type="email"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
           </a-form-item>
           <a-form-item label="Phone" name="phone">
-            <a-input v-model:value="formState.phone" />
+            <a-input v-model:value="formState.phone"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
           </a-form-item>
           <a-form-item label="Address" name="address">
             <a-textarea v-model:value="formState.address" :rows="2" />
           </a-form-item>
           <a-form-item label="Tax ID" name="tax_id">
-            <a-input v-model:value="formState.tax_id" />
+            <a-input v-model:value="formState.tax_id"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
           </a-form-item>
           <a-form-item label="Notes" name="notes">
             <a-textarea v-model:value="formState.notes" :rows="3" />

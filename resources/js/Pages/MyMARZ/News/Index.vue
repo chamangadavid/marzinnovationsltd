@@ -350,6 +350,80 @@ watch(searchQuery, handleSearch);
 
           <!-- View Modal -->
           <a-modal
+          v-model:visible="isModalVisible"
+          :title="selectedRecord?.title"
+          width="800px"
+          :footer="null"
+          @cancel="isModalVisible = false"
+        ><hr/><br/>
+          <div v-if="selectedRecord" class="p-6 space-y-6 text-gray-700">
+            <!-- Info Grid -->
+            <div class="grid grid-cols-2 gap-6">
+              <!-- Title -->
+              <div>
+                <h4 class="text-sm text-gray-500 font-medium mb-1">Title</h4>
+                <p class="text-lg font-semibold">{{ selectedRecord.title }}</p>
+              </div>
+        
+              <!-- Status -->
+              <div>
+                <h4 class="text-sm text-gray-500 font-medium mb-1">Status</h4>
+                <a-tag :color="selectedRecord.is_published ? 'green' : 'orange'" class="text-base">
+                  {{ selectedRecord.is_published ? 'Published' : 'Draft' }}
+                </a-tag>
+              </div>
+        
+              <!-- Description -->
+              <div class="col-span-2">
+                <h4 class="text-sm text-gray-500 font-medium mb-1">Description</h4>
+                <p class="whitespace-pre-line bg-gray-50 border border-gray-200 rounded-md p-4 leading-relaxed">
+                  {{ selectedRecord.description }}
+                </p>
+              </div>
+        
+              <!-- Images -->
+              <div class="col-span-2">
+                <h4 class="text-sm text-gray-500 font-medium mb-2">Images</h4>
+                <div class="flex flex-wrap gap-4">
+                  <img
+                    v-for="(image, index) in selectedRecord.images"
+                    :key="index"
+                    :src="image"
+                    class="w-36 h-auto rounded shadow-sm cursor-pointer hover:scale-105 transition-transform duration-200"
+                    @click="() => { previewImage = image; previewVisible = true }"
+                  />
+                </div>
+              </div>
+        
+              <!-- Created At -->
+              <div>
+                <h4 class="text-sm text-gray-500 font-medium mb-1">Created At</h4>
+                <p class="text-base">{{ new Date(selectedRecord.created_at).toLocaleString() }}</p>
+              </div>
+            </div>
+        
+            <!-- Footer Buttons -->
+            <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
+              <a-button
+                v-if="!selectedRecord.is_published"
+                type="primary"
+                @click="publishNews(selectedRecord.id)"
+              >
+                Publish News
+              </a-button>
+              <a-button
+                v-else
+                danger
+                @click="unpublishNews(selectedRecord.id)"
+              >
+                Unpublish News
+              </a-button>
+              <a-button @click="isModalVisible = false">Close</a-button>
+            </div>
+          </div>
+        </a-modal>
+        
+          <!-- <a-modal
             v-model:visible="isModalVisible"
             :title="selectedRecord?.title"
             width="800px"
@@ -410,7 +484,7 @@ watch(searchQuery, handleSearch);
               <a-button @click="isModalVisible = false">Close</a-button>
            
               </div>
-          </a-modal>
+          </a-modal> -->
 
           <!-- Create Modal -->
           <a-modal

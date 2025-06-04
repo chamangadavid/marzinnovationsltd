@@ -532,19 +532,19 @@ onMounted(() => {
         >
             <a-form layout="vertical">
                 <a-form-item label="Name" required>
-                    <a-input v-model:value="customerFormState.name" />
+                    <a-input v-model:value="customerFormState.name" style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
                 </a-form-item>
                 <a-form-item label="Email">
-                    <a-input v-model:value="customerFormState.email" type="email" />
+                    <a-input v-model:value="customerFormState.email" type="email" style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;" />
                 </a-form-item>
                 <a-form-item label="Phone">
-                    <a-input v-model:value="customerFormState.phone" />
+                    <a-input v-model:value="customerFormState.phone"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
                 </a-form-item>
                 <a-form-item label="Address">
                     <a-textarea v-model:value="customerFormState.address" rows="2" />
                 </a-form-item>
                 <a-form-item label="Tax ID">
-                    <a-input v-model:value="customerFormState.tax_id" />
+                    <a-input v-model:value="customerFormState.tax_id"   style="border: 1px solid #e9e9e9; border-radius: 8px; height: 32px; line-height: 32px;"/>
                 </a-form-item>
             </a-form>
         </a-modal>

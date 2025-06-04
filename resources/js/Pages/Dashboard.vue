@@ -3,6 +3,20 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { FileTextOutlined, SwapOutlined, FileDoneOutlined, IdcardOutlined, GiftOutlined, PhoneOutlined, UserOutlined, ReadOutlined, AppstoreOutlined, PictureOutlined, CalendarOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { Head } from '@inertiajs/vue3';
 
+
+// Props from Inertia
+defineProps({
+  auth: Object
+});
+
+
+const activeKey = ref('1');
+
+// Function to check if user has a permission
+const can = (permission, auth) => {
+  return auth?.permissions?.includes(permission);
+};
+
 </script>
 
 <template>
@@ -25,131 +39,96 @@ import { Head } from '@inertiajs/vue3';
                     <div class="p-6 text-gray-900">
 
                         <div>
-                            <!-- <a-breadcrumb>
-                            <a-breadcrumb-item> 
-                              <h1 style="font-size: 34px !important;">Dashboard</h1>
-                            </a-breadcrumb-item>
-                            </a-breadcrumb> -->
-              
                             <a-tabs v-model:activeKey="activeKey">
                               <a-tab-pane key="1" tab="Quick Links">
 
                                 <div class="flex flex-wrap gap-4">
+                                                  
+                                  <Card v-if="can('manage transactions', auth)"
+                                  title="Transactions" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="transactions.index">
+                                  <template #icon>
+                                  <SwapOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                    <div class="flex flex-wrap gap-4">
+                                  <Card v-if="can('manage receipts', auth)"
+                                  title="Receipts" 
+                                  subTitle="Create, edit, update and delete of Receipts" 
+                                  routeName="receipts.quotations">
+                                  <template #icon>
+                                  <FileDoneOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                        <div class="flex flex-wrap gap-4">
-                                            
-                                            <Card title="Transactions" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="transactions.index">
-                                            <template #icon>
-                                            <SwapOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card  v-if="can('manage news management', auth)"
+                                  title="News" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="news.index">
+                                  <template #icon>
+                                  <ReadOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="News Management" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="news.index">
-                                            <template #icon>
-                                            <ReadOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card v-if="can('manage promotions', auth)"
+                                  title="Promotions" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="promotions.index">
+                                  <template #icon>
+                                  <GiftOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Promotions" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="promotions.index">
-                                            <template #icon>
-                                            <GiftOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card v-if="can('manage services', auth)"
+                                  title="Services" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="services.index">
+                                  <template #icon>
+                                  <AppstoreOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Services" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="services.index">
-                                            <template #icon>
-                                            <AppstoreOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card v-if="can('manage gallery', auth)"
+                                  title="Gallary" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="gallery.index">
+                                  <template #icon>
+                                  <FileTextOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Gallary" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="gallery.index">
-                                            <template #icon>
-                                            <FileTextOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card v-if="can('manage contact', auth)"
+                                  title="Contact" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="contacts.index">
+                                  <template #icon>
+                                  <PhoneOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Contact" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="contacts.index">
-                                            <template #icon>
-                                            <PhoneOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  <Card v-if="can('manage access control', auth)"
+                                  title="Access Control" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="admin.rolesAndPermission">
+                                  <template #icon>
+                                  <SettingOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Receipts" 
-                                            subTitle="Create, edit, update and delete of Receipts" 
-                                            routeName="receipts.quotations">
-                                            <template #icon>
-                                            <FileDoneOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
+                                  
+                                  <Card title="My Account" 
+                                  subTitle="Create, edit, update and delete of News" 
+                                  routeName="profile.edit">
+                                  <template #icon>
+                                  <IdcardOutlined style="font-size: 24px;" />
+                                  </template>
+                                  </Card>
 
-                                            <Card title="Access Control" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="admin.rolesAndPermission">
-                                            <template #icon>
-                                            <SettingOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card>
-
-                                        
-                                            <Card title="My Account" 
-                                            subTitle="Create, edit, update and delete of News" 
-                                            routeName="profile.edit">
-                                            <template #icon>
-                                            <IdcardOutlined style="font-size: 24px;" />
-                                            </template>
-                                            </Card> 
-
-
-                                           
-                                          </div>
-
-                                          
-                                        <!-- <Card
-                                          class="w-full sm:w-1/2 md:w-1/4 lg:w-1/5"
-                                          iconClass="fa-solid fa-newspaper"
-                                          title="News Management"
-                                          subTitle="Create, edit, update and delete of News"
-                                          routeName="rolesAndPermissions"
-                                        />
-                                      
-                                        <Card
-                                          class="w-full sm:w-1/2 md:w-1/4 lg:w-1/5"
-                                          iconClass="fa-solid fa-newspaper"
-                                          title="Events Management"
-                                          subTitle="Create, edit, update and delete of Events"
-                                          routeName="rolesAndPermissions"
-                                        />
-                                      
-                                        <Card
-                                          class="w-full sm:w-1/2 md:w-1/4 lg:w-1/5"
-                                          iconClass="fa-solid fa-gear"
-                                          title="My Account"
-                                          subTitle="Update your account's profile information, password, and email address"
-                                          routeName="profile.edit"
-                                        /> -->
-                                      </div>
-                                       
-              
-                               
-                                </div>
+                                </div> 
                               </a-tab-pane>
                             </a-tabs>
                           </div>
-
                     </div>
                 </div>
             </div>

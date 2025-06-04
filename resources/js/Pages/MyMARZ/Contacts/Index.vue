@@ -252,8 +252,95 @@ onMounted(() => {
               </template>
             </template>
           </a-table>
+          <!-- <a-modal
+          v-model:visible="isModalVisible"
+          title="Contact Details"
+          width="800px"
+          :footer="null"
+          @cancel="isModalVisible = false"
+        >
+          <div v-if="selectedRecord" class="p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+              <div>
+                <p class="text-sm text-gray-500">Serial No:</p>
+                <p class="font-medium text-gray-900">{{ selectedRecord.serialNo }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Full Name:</p>
+                <p class="font-medium text-gray-900">{{ selectedRecord.fullName }}</p>
+              </div>
+        
+              <div>
+                <p class="text-sm text-gray-500">Email:</p>
+                <p class="font-medium text-gray-900">{{ selectedRecord.email }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Subject:</p>
+                <p class="font-medium text-gray-900">{{ selectedRecord.subject }}</p>
+              </div>
+        
+              <div class="md:col-span-2">
+                <p class="text-sm text-gray-500">Message:</p>
+                <p class="font-medium text-gray-900 whitespace-pre-line">{{ selectedRecord.message }}</p>
+              </div>
+        
+              <div>
+                <p class="text-sm text-gray-500">Created At:</p>
+                <p class="font-medium text-gray-900">{{ selectedRecord.createdAt }}</p>
+              </div>
+            </div>
+          </div>
+          <div v-else class="p-4 text-center text-gray-500">
+            No contact details available.
+          </div>
+        </a-modal> -->
 
-          <a-modal
+        <a-modal
+        v-model:visible="isModalVisible"
+        title="Contact Details"
+        width="800px"
+        :footer="null"
+        @cancel="isModalVisible = false"
+      >
+      <hr><br/>
+        <div v-if="selectedRecord" class="p-4 space-y-6">
+          <div class="grid grid-cols-2 gap-6 text-base text-gray-700">
+            <div>
+              <span class="font-medium text-gray-500">Serial No:</span>
+              <p class="mt-1 font-semibold">{{ selectedRecord.serialNo }}</p>
+            </div>
+
+            <div>
+              <span class="font-medium text-gray-500">Full Name:</span>
+              <p class="mt-1 font-semibold">{{ selectedRecord.fullName }}</p>
+            </div>
+
+            <div>
+              <span class="font-medium text-gray-500">Email:</span>
+              <p class="mt-1 font-semibold">{{ selectedRecord.email }}</p>
+            </div>
+
+            <div>
+              <span class="font-medium text-gray-500">Subject:</span>
+              <p class="mt-1 font-semibold">{{ selectedRecord.subject }}</p>
+            </div>
+
+            <div class="col-span-2">
+              <span class="font-medium text-gray-500">Message:</span>
+              <p class="mt-1 font-normal whitespace-pre-line border border-gray-200 rounded p-3 bg-gray-50">
+                {{ selectedRecord.message }}
+              </p>
+            </div>
+
+            <div>
+              <span class="font-medium text-gray-500">Created At:</span>
+              <p class="mt-1 font-semibold">{{ selectedRecord.createdAt }}</p>
+            </div>
+          </div>
+        </div>
+      </a-modal>
+
+          <!-- <a-modal
             v-model:visible="isModalVisible"
             title="Contact Details"
             width="800px"
@@ -284,7 +371,7 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-          </a-modal>
+          </a-modal> -->
         </div>
 
         <!-- <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
