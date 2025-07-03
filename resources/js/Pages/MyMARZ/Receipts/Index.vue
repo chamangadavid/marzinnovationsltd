@@ -1,6 +1,15 @@
+<template>
+  <div>
+    <!-- Your content here -->
+  </div>
+</template>
 
-
-
+<script>
+export default {
+  name: 'Index',
+  // your component logic here
+}
+</script>
 
 
 <!-- 
