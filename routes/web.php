@@ -42,56 +42,26 @@ use Inertia\Inertia;
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
-
-
-
-
-
-
-
-
-
         Route::get('/roles-permissions', fn () => Inertia::render('RolesPermissions'))->name('roles.permissions');
-
         Route::get('/roles', [RolePermissionController::class, 'roles']);
         Route::post('/roles', [RolePermissionController::class, 'storeRole']);
-
         Route::get('/permissions', [RolePermissionController::class, 'permissions']);
         Route::post('/permissions', [RolePermissionController::class, 'storePermission']);
-
         Route::get('/users', [RolePermissionController::class, 'users']);
         Route::post('/users/assign-role', [RolePermissionController::class, 'assignRole']);
-
-
         Route::put('/roles/{id}', [RolePermissionController::class, 'update']);
         Route::post('/roles/bulk-delete', [RolePermissionController::class, 'bulkDestroy']);
         Route::delete('/roles/{id}', [RolePermissionController::class, 'destroy']);
-
-
-
-
-
-
-
-
-
-
-
-            
         //navigation links
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
         Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
         Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
         Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+        Route::delete('/promotions/{id}', [PromotionController::class, 'destroy']);
         Route::get('/news', [NewsController::class, 'index'])->name('news.index');
         Route::get('/transactions', [TransactionsController::class, 'index'])->name('transactions.index');
         Route::get('/rolesAndPermission', [RolePermissionController::class, 'rolesAndPermission'])->name('admin.rolesAndPermission');
-       // Route::get('/rolesAndPermission', [RolesAndPermissionController::class, 'rolesAndPermission'])->name('admin.rolesAndPermission');
         Route::get('/receipts', [ReceiptController::class, 'index'])->name('receipts.quotations');
-
-        // Add these routes to your existing web.php
         Route::get('/search-users', [UserSearchController::class, 'search'])->name('users.search');
         Route::get('/users/{user}', [UserSearchController::class, 'show'])->name('users.show');
 
@@ -105,8 +75,7 @@ use Inertia\Inertia;
         Route::delete('/galleries/{contact}', [GalleryController::class, 'destroy']);
         Route::post('/gallery-categories', [GalleryCategoryController::class, 'store']);
         Route::get('/gallery-category', [GalleryCategoryController::class, 'index']);
-        Route::get('/fetch-gallery-category', [GalleryCategoryController::class, 'index']);
-
+        
         //promotions
         Route::get('/getPromotions', [PromotionController::class, 'getPromotion']);
         Route::post('/promotions', [PromotionController::class, 'store']);
@@ -195,21 +164,21 @@ use Inertia\Inertia;
 
     });
 
-    
     //Navigation links interface
     Route::post('/contact', [ContactController::class, 'store']);
     Route::get('/displayGalleries', [GalleryController::class, 'displayGalleries']);
     Route::get('/getLatestNews', [NewsController::class, 'getLatestNews']);
     Route::get('/getPromotions', [PromotionController::class, 'getPromotions']);
     Route::get('/getAllServices', [ServicesController::class, 'getAllServices']);
+    Route::get('/fetch-gallery-category', [GalleryCategoryController::class, 'index']);
     
-    //render page
+    //site rendering page
     Route::get('about-us', function () {
         return Inertia::render('Site/aboutUs');
     })->name('aboutUs');
 
     Route::get('/services-list', function () {
-        return Inertia::render('MyMARZ/Services/ServicesList'); // new Vue component name
+        return Inertia::render('MyMARZ/Services/ServicesList');
     })->name('servicesList');
   
     Route::get('contact-us', function () {
@@ -223,20 +192,5 @@ use Inertia\Inertia;
     ->name('news.showNews');
 
    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 require __DIR__.'/auth.php';

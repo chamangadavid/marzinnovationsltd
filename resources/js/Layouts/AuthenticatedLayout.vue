@@ -96,7 +96,7 @@ onUnmounted(() => {
 <template>
   <div>
     <div class="min-h-screen bg-gray-100">
-      <nav class="bg-purple-600 text-white shadow rounded-lg px-6 mx-4 mt-3">
+      <nav class="bg-purple-900 text-white shadow rounded-lg px-6 mx-4 mt-3">
         <!-- Primary Navigation Menu -->
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 justify-between">

@@ -98,23 +98,6 @@ const dynamicRoute = computed(() => {
   }
 }
 
-
-/*
-.certificate-card {
-  background-image: url("/assets/bg-grey.png");
-  background-repeat: no-repeat;
-  background-color: #fff;
-  background-size: cover;
-  width: 200px !important;
-  border: 0px solid #e0e0e0;
-  min-height: 230px;
-  border-radius: 20px;
-  padding: 20px;
-  cursor: pointer;
-  box-shadow: 0 11px 30px 0 rgba(0, 0, 0, 0.07);
-}
-  */
-
 .header {
   display: flex;
   justify-content: space-between;

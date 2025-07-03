@@ -46,7 +46,7 @@ const can = (permission, auth) => {
                                                   
                                   <Card v-if="can('manage transactions', auth)"
                                   title="Transactions" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Transactions" 
                                   routeName="transactions.index">
                                   <template #icon>
                                   <SwapOutlined style="font-size: 24px;" />
@@ -73,7 +73,7 @@ const can = (permission, auth) => {
 
                                   <Card v-if="can('manage promotions', auth)"
                                   title="Promotions" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Promotion" 
                                   routeName="promotions.index">
                                   <template #icon>
                                   <GiftOutlined style="font-size: 24px;" />
@@ -82,7 +82,7 @@ const can = (permission, auth) => {
 
                                   <Card v-if="can('manage services', auth)"
                                   title="Services" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Services" 
                                   routeName="services.index">
                                   <template #icon>
                                   <AppstoreOutlined style="font-size: 24px;" />
@@ -91,7 +91,7 @@ const can = (permission, auth) => {
 
                                   <Card v-if="can('manage gallery', auth)"
                                   title="Gallary" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Gallery" 
                                   routeName="gallery.index">
                                   <template #icon>
                                   <FileTextOutlined style="font-size: 24px;" />
@@ -100,7 +100,7 @@ const can = (permission, auth) => {
 
                                   <Card v-if="can('manage contact', auth)"
                                   title="Contact" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Contact" 
                                   routeName="contacts.index">
                                   <template #icon>
                                   <PhoneOutlined style="font-size: 24px;" />
@@ -109,7 +109,7 @@ const can = (permission, auth) => {
 
                                   <Card v-if="can('manage access control', auth)"
                                   title="Access Control" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Access Control" 
                                   routeName="admin.rolesAndPermission">
                                   <template #icon>
                                   <SettingOutlined style="font-size: 24px;" />
@@ -118,7 +118,7 @@ const can = (permission, auth) => {
 
                                   
                                   <Card title="My Account" 
-                                  subTitle="Create, edit, update and delete of News" 
+                                  subTitle="Create, edit, update and delete of Accounts" 
                                   routeName="profile.edit">
                                   <template #icon>
                                   <IdcardOutlined style="font-size: 24px;" />

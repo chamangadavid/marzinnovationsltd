@@ -134,7 +134,7 @@ const handleCreateCancel = () => {
 const handleDelete = async (id) => {
   try {
     await axios.delete(`/promotions/${id}`);
-    message.success('Promotion deleted successfully');
+    message.success('Promotion deleteds successfully');
     fetchPromotions();
   } catch (error) {
     console.error('Error deleting promotion:', error);
