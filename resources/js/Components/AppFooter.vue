@@ -42,14 +42,14 @@ import { Head, Link } from '@inertiajs/vue3';
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-hero-purple" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                             </svg>
-                            Permanent House Room 253A Cairo
+                            Permanent House Room 253A Cairo Lusaka
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-hero-purple" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0018 4H2a2 2 0 00-.003 1.884z" />
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
-                            marzinnov8@gmail.com
+                            info@marzinnovationsltd.com
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-hero-purple" viewBox="0 0 20 20" fill="currentColor">
@@ -73,7 +73,7 @@ import { Head, Link } from '@inertiajs/vue3';
         <div class="bg-gray-300 py-4">
             <div class="container mx-auto px-5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
                 <p class="mb-2 md:mb-0">© 2025 Marz Innovations Limited. All rights reserved. 
-                    Designed & Developed by Umoyo Printex Limited (0979760679) </p> 
+                    Designed & Developed by Chamanga David 0979 760 679 </p> 
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-600 hover:text-hero-purple transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
