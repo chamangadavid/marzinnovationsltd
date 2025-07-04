@@ -4,7 +4,7 @@
 
 
 /* Loading screen transitions */
-/* #app-loading {
+#app-loading {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,10 +16,10 @@
   
   #app-loading.fade-out {
     opacity: 0;
-  } */
+  }
   
 
-  #app-loading {
+  /* #app-loading {
   position: fixed;
   inset: 0;
   background-color: white;
@@ -33,7 +33,7 @@
 #app-loading.fade-out {
   opacity: 0;
   pointer-events: none;
-}
+} */
 
 
   /* Ant Design Progress Bar customization */
