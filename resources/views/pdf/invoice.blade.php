@@ -14,14 +14,25 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .company-info {
+        /* .company-info {
             flex: 1;
+        } */
+         .company-info {
+            /* margin-top: -60px; */
+            width: 60%;
+        }
+
+         .company-info img {
+            max-width: 100px; /* Reduced from 150px */
+            /* height: auto; */
+            margin-bottom: 2px;
         }
 
         .document-info {
+            margin-top: -400px;
             flex: 1;
             text-align: right;
         }
@@ -50,6 +61,7 @@
         }
 
         .bill-to {
+            margin-top: 120px;
             margin-bottom: 30px;
         }
 
@@ -95,10 +107,11 @@
 
     <div class="header">
         <div class="company-info">
+            <img src="{{ public_path('assets/marz-logo.png') }}" alt="Company Logo">
             <h2>{{ config('app.name') }}</h2>
-            <p>123 Business Street, City, Country</p>
-            <p>Phone: +1234567890 | Email: info@company.com</p>
-            <p>Tax ID: 123456789 | VAT: GB123456789</p>
+            <p>Permanent House, Cairo Road 2nd Floor 253A, Lusaka, Zambia</p>
+            <p>Phone: +260 966 390 807 | Email: info@marzinnovationsltd.com</p>
+            <p>Tpin #: 2003431233</p>
         </div>
 
         <div class="document-info">
@@ -106,7 +119,7 @@
             <p><strong>Invoice #:</strong> {{ $invoice->invoice_number }}</p>
             <p><strong>Date:</strong> {{ $invoice->date->format('d/m/Y') }}</p>
             <p>
-                <strong>Due Date:</strong>
+                <strong>Validity Date:</strong>
                 <span class="{{ \Carbon\Carbon::now()->gt($invoice->due_date) ? 'due-date' : '' }}">
                     {{ $invoice->due_date->format('d/m/Y') }}
                 </span>
@@ -159,7 +172,7 @@
     </div>
 
     <div class="footer">
-        Thank you for your business!
+        Creating Values Together!
     </div>
 
 </body>

@@ -19,7 +19,13 @@
             flex: 1 1 45%;
             min-width: 250px;
         }
+         .company-info img {
+            max-width: 100px; /* Reduced from 150px */
+            /* height: auto; */
+            margin-bottom: 2px;
+        }
         .document-info {
+            margin-top: -400px;
             flex: 1 1 50%;
             min-width: 300px;
             text-align: right;
@@ -30,6 +36,7 @@
             overflow-wrap: break-word;
         }
         .customer-info {
+            margin-top: 120px;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #f9f9f9;
@@ -86,12 +93,12 @@
         <div class="paid-stamp">PAID</div>
 
         <div class="header">
-            <div class="company-info">
-                <h2 style="margin-bottom: 5px; color: #2c3e50;">{{ config('app.name') }}</h2>
-                <p>{{ config('app.company_address') }}</p>
-                <p>Phone: {{ config('app.company->phone') }}</p>
-                <p>Email: {{ config('app.company->email') }}</p>
-                <p>Tax ID: {{ config('app.company_tax_id') }}</p>
+              <div class="company-info">
+                <img src="{{ public_path('assets/marz-logo.png') }}" alt="Company Logo">
+                <h2>{{ config('app.name') }}</h2>
+                <p>Permanent House, Cairo Road 2nd Floor 253A, Lusaka, Zambia</p>
+                <p>Phone: +260 966 390 807 | Email: info@marzinnovationsltd.com</p>
+                <p>Tpin #: 2003431233</p>
             </div>
             <div class="document-info">
                 <h2 style="margin-bottom: 10px; color: #3498db;">RECEIPT</h2>
@@ -104,7 +111,7 @@
         </div>
 
         <div class="customer-info">
-            <h3 style="margin-bottom: 8px; color: #2c3e50;">Received From:</h3>
+            <h3 style="margin-bottom: 8px; color: #2c3e50;">RECEIVED FROM </h3>
             <p><strong>{{ $receipt->customer->name }}</strong></p>
             <p>{{ $receipt->customer->address }}</p>
             <p>Phone: {{ $receipt->customer->phone }}</p>
@@ -147,8 +154,8 @@
         @endif
 
         <div class="footer">
-            <p>This receipt serves as confirmation of payment received.</p>
-            <p>{{ config('app.name') }} | {{ config('app.company_website') }}</p>
+            <p>Creating Value Together.</p>
+            <p>{{ config('app.name') }} </p>
         </div>
     </div>
 </body>

@@ -17,10 +17,7 @@
             margin-top: -120px;
             width: 60%;
         }
-        /* .company-info img {
-            max-width: 150px;
-            margin-bottom: 10px;
-        } */
+
         .company-info img {
             max-width: 100px; /* Reduced from 150px */
             /* height: auto; */
@@ -81,7 +78,8 @@
         <img src="{{ public_path('assets/marz-logo.png') }}" alt="Company Logo">
         <h2 style="margin-bottom: 5px;">{{ config('app.name') }}</h2>
         <p>Permanent House, Cairo Road Second Floor 253A, Lusaka, Zambia</p>
-        <p>Phone: +260 966 390 807 | 0976 212 184 Email: info@marzinnovationsltd.com</p>
+        <p>Phone: +260 966 390 807 | 0976 212 184 </p>
+        <p>Email: info@marzinnovationsltd.com</p>
         <p>Tpin #: 2003431233</p>
     </div>
 </div>

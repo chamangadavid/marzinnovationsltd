@@ -1,23 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Delivery Note #{{ $deliveryNote->delivery_note_number }}</title>
     <style>
-        body { font-family: DejaVu Sans, sans-serif; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h1 { margin: 0; font-size: 24px; }
-        .header p { margin: 5px 0; }
-        .info-table { width: 100%; margin-bottom: 20px; border-collapse: collapse; }
-        .info-table td { padding: 5px; vertical-align: top; }
-        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        .items-table th, .items-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .items-table th { background-color: #f2f2f2; }
-        .signature { margin-top: 50px; }
-        .signature-table { width: 100%; }
-        .signature-table td { width: 50%; padding: 10px; }
-        .footer { margin-top: 30px; font-size: 12px; text-align: center; }
+        body {
+            font-family: DejaVu Sans, sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 5px 0;
+        }
+
+        .info-table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .info-table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .items-table th,
+        .items-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .items-table th {
+            background-color: #f2f2f2;
+        }
+
+        .signature {
+            margin-top: 50px;
+        }
+
+        .signature-table {
+            width: 100%;
+        }
+
+        .signature-table td {
+            width: 50%;
+            padding: 10px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>DELIVERY NOTE</h1>
@@ -63,14 +116,14 @@
         </thead>
         <tbody>
             @foreach($deliveryNote->items as $index => $item)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $item->description }}</td>
-                <td>{{ number_format($item->quantity, 2) }}</td>
-                <td>{{ $item->unit ?? '-' }}</td>
-                <td>{{ number_format($item->unit_price, 2) }}</td>
-                <td>{{ number_format($item->total, 2) }}</td>
-            </tr>
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>{{ number_format($item->quantity, 2) }}</td>
+                    <td>{{ $item->unit ?? '-' }}</td>
+                    <td>{{ number_format($item->unit_price, 2) }}</td>
+                    <td>{{ number_format($item->total, 2) }}</td>
+                </tr>
             @endforeach
             <tr>
                 <td colspan="5" style="text-align: right;"><strong>Total:</strong></td>
@@ -80,10 +133,10 @@
     </table>
 
     @if($deliveryNote->notes)
-    <div style="margin-bottom: 20px;">
-        <strong>Notes:</strong><br>
-        {{ $deliveryNote->notes }}
-    </div>
+        <div style="margin-bottom: 20px;">
+            <strong>Notes:</strong><br>
+            {{ $deliveryNote->notes }}
+        </div>
     @endif
 
     <div class="signature">
@@ -91,7 +144,7 @@
             <tr>
                 <td>
                     <strong>Prepared By:</strong><br><br>
-                    ________________________<br>
+                    _______________________<br>
                     Name/Signature
                 </td>
                 <td>
@@ -110,4 +163,5 @@
         Thank you for your business!
     </div>
 </body>
+
 </html>
