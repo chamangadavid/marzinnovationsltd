@@ -4,7 +4,9 @@ import { Head } from '@inertiajs/vue3';
 import { Table, Popconfirm, Modal, Input, DatePicker, Select, Button, message } from 'ant-design-vue';
 import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
-import { debounce } from 'lodash';
+//import { debounce } from 'lodash';
+import debounce from 'lodash/debounce' // ✅
+
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
