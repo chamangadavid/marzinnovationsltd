@@ -37,14 +37,14 @@ class NewContactMessage extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->subject('New Contact Message Received')
-            ->greeting('Hello!')
-            ->line('You have received a new message from the website contact form.')
-            ->line('**Name**: ' . $this->contactData['fullName'])
-            ->line('**Email**: ' . $this->contactData['email'])
+            ->subject('Client Inquiry via Mar’z Innovations Website')
+            ->greeting('Dear Team,')
+            ->line('You have received a new inquiry via the website contact form. Below are the details:')
+            ->line('**Full Name**: ' . $this->contactData['fullName'])
+            ->line('**Email Address**: ' . $this->contactData['email'])
             ->line('**Subject**: ' . $this->contactData['subject'])
             ->line('**Message**: ' . $this->contactData['message'])
-            ->salutation('Regards, Marz Innovations Ltd');
+            ->salutation('Kind regards, Mar’z Innovations Ltd');
     }
 
     /**

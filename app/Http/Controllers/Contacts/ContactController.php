@@ -30,7 +30,7 @@ class ContactController extends Controller
         Contact::create($validated);
 
         // Send notification to static email
-            Notification::route('mail', 'umoyoprintex@gmail.com')
+            Notification::route('mail', 'info@marzinnovationsltd.com')
             ->notify(new NewContactMessage($validated));
 
         return response()->json([
